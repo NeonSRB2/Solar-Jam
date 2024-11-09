@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Object/Player.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="SphereShape" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=5]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="groun" type="StaticBody" parent="."]
+transform = Transform( 30, 0, 0, 0, 0.75, 0, 0, 0, 20, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="groun"]
+mesh = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="groun"]
+shape = SubResource( 2 )
+
+[node name="thing1" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28227, 1.54642, 0 )
+
+[node name="Area" type="Area" parent="thing1"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="thing1/Area"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="thing1"]
+material_override = SubResource( 4 )
+mesh = SubResource( 5 )
+
+[node name="thing2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63444, 1.54642, 0 )
+
+[node name="Area" type="Area" parent="thing2"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="thing2/Area"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="thing2"]
+material_override = SubResource( 4 )
+mesh = SubResource( 5 )
+
+[node name="PLAYER" parent="." instance=ExtResource( 1 )]

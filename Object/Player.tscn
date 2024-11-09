@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Object/Player.gd" type="Script" id=1]
+[ext_resource path="res://Object/PlayerStates/Normal.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=3]
+
+[sub_resource type="CapsuleMesh" id=4]
+
+[sub_resource type="CylinderShape" id=5]
+height = 8.0
+radius = 8.0
+
+[sub_resource type="QuadMesh" id=6]
+
+[node name="PLAYER" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22356, 0 )
+script = ExtResource( 1 )
+
+[node name="HITBOX" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 4 )
+
+[node name="STATES" type="Node" parent="."]
+
+[node name="Normal" type="Node" parent="STATES"]
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.965007, 0.262223, 0, -0.262223, 0.965007, 0, 10.6512, 19.519 )
+
+[node name="SELECTABLE" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="SELECTABLE"]
+shape = SubResource( 5 )
+
+[node name="SELECTICON" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="SELECTICON"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42758, 0 )
+mesh = SubResource( 6 )
+
+[connection signal="area_entered" from="SELECTABLE" to="." method="_on_SELECTABLE_area_entered"]
+[connection signal="area_exited" from="SELECTABLE" to="." method="_on_SELECTABLE_area_exited"]
